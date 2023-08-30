@@ -46,9 +46,9 @@ body * {
 }
 
 #container {
-    width: 360px; 
+    width: 100%;
+    max-width: 588px; 
 /*  height: 712px; - altura geralmente não precisa definir em CSS pois ela segue o conteúdo da pág*/
-    margin:auto;
 /*  display: block - utiliza toda a largura da tela, empurra qualquer conteúdo para baixo  */ 
 /*  padding: 24px; /*adicionar preenchimento interno para cima, baixo e lados*/
     margin: 56px auto 0px auto;  /*56px = cima ; auto = right ; 0px = baixo ; auto = esquerda*/  
