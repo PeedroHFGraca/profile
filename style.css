@@ -10,7 +10,7 @@
     --stroke-color:rgba(255, 255, 255, 0.5); /*cor branco*/
     --surface-color: rgba(255, 255, 255, 0.5);
     --surface-color-houver: rgba(0, 0, 0, 0.123);
-    --highlight-color: rgba(255, 255, 255, 0.2);
+    --highlight-color: rgba(255, 255, 255, 0.11);
     --switch-bg-url: url(assets/moon-stars.svg);
     /*Usamos 'stroke/surface-color como varáveis que definem cores ao invés de cores diretas'*/
  
@@ -22,7 +22,7 @@
     --stroke-color:rgba(0, 0, 0, 0.5); /*cor preto*/
     --surface-color: rgba(0, 0, 0, 0.5);
     --surface-color-houver: rgba(0, 0, 0, 0.07);
-    --highlight-color: rgba(0, 0, 0, 0.02);
+    --highlight-color: rgba(0, 0, 0, 0.144);
     --switch-bg-url: url(assets/sun.svg);
     /*Usamos 'stroke/surface-color como varáveis que definem cores ao invés de cores diretas'*/
 }
@@ -91,15 +91,21 @@ border: 0;
 border-radius: 50%; /* faz ficar redondo*/
 
 position: absolute; /*sobreposição de camada*/
+left: 0;
 z-index: 10; /*subir o botão para fica sobre o elemento abaixo (subir de andar)*/
 /*right: 0; posição do botão: top, left, rigth, bottom*/
 top: 50%; /* alinhar o botão*/
 transform: translateY(-50%); /*movimentar o botão para cima e baixo */
+
+animation: voltando 0.2s; /*fazer a animação (@keyframes-voltando) voltar deslizando, não precisamos de 'forwards' pois o left: está em 0 */
 }
 
 .light #switch button {
-    right: 0;
-    left: initial;
+    animation: deslizando 0.2s forwards; /*fazer a animação (@keyframes-deslizando) e manter propriedade(ficar com o solzinho na direita)*/
+}
+
+#switch button:hover{ /*Hover = quando passar o mouse em cima*/
+    outline: 8px solid var(--highlight-color);
 }
 
 #switch span { /*span não aceita largura pois é display inline */
@@ -193,3 +199,22 @@ footer {
         --bg-url: url(./assets/bg-desktop-light.jpg);
     }
 } 
+
+/* animation */
+@keyframes deslizando { /*movendo o botão de Light mode (mover da esquerda para direita)*/
+    from{
+        left: 0;
+    }
+    to{
+        left:50%
+    }
+}
+
+@keyframes voltando { /*inverter situação acima*/
+    from{
+        left: 50%
+    }
+    to{
+        left: 0%
+    }
+}
