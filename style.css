@@ -1,0 +1,183 @@
+* {
+    margin: 0;  /* tirar todo margin e padding do bronwse*/
+    padding: 0; /* preenchimento interno */
+    box-sizing: border-box;  /*medida do tamanho da caixa ser medida a partir da borda*/
+}
+
+:root{ /* parte RAÍZ do site (black-mode)  */
+    --text-color: white;
+    --bg-url: url(assets/bg-mobile.jpg);
+    --stroke-color:rgba(255, 255, 255, 0.5); /*cor branco*/
+    --surface-color: rgba(255, 255, 255, 0.5);
+    --surface-color-houver: rgba(0, 0, 0, 0.123);
+    --highlight-color: rgba(255, 255, 255, 0.2);
+    --switch-bg-url: url(assets/moon-stars.svg);
+    /*Usamos 'stroke/surface-color como varáveis que definem cores ao invés de cores diretas'*/
+ 
+}
+
+.light{ /* Light mode (está no ínicio do HTML) */
+    --text-color: black;
+    --bg-url: url(assets/bg-mobile-light.jpg);
+    --stroke-color:rgba(0, 0, 0, 0.5); /*cor preto*/
+    --surface-color: rgba(0, 0, 0, 0.5);
+    --surface-color-houver: rgba(0, 0, 0, 0.07);
+    --highlight-color: rgba(0, 0, 0, 0.02);
+    --switch-bg-url: url(assets/sun.svg);
+    /*Usamos 'stroke/surface-color como varáveis que definem cores ao invés de cores diretas'*/
+}
+
+body {
+    /*
+    background-image: url(assets/bg-mobile.jpg); ( background é uma img que tenho baixada  )
+    background-repeat: no-repeat; (essa img não se repete) 
+    background-position: top center; (img fica no topo centralizada)
+    background-size: cover; (preencher todo o espaço em branco)
+        Ou podemos....
+    */
+
+    /*background: color image repeat position/size */
+    background: var(--bg-url) no-repeat top center/cover;
+}
+
+body * {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-color)
+}
+
+#container {
+    width: 360px; 
+/*  height: 712px; - altura geralmente não precisa definir em CSS pois ela segue o conteúdo da pág*/
+    margin:auto;
+/*  display: block - utiliza toda a largura da tela, empurra qualquer conteúdo para baixo  */ 
+/*  padding: 24px; /*adicionar preenchimento interno para cima, baixo e lados*/
+    margin: 56px auto 0px auto;  /*56px = cima ; auto = right ; 0px = baixo ; auto = esquerda*/  
+    padding: 0 24px;
+}
+
+/* PROFILE */
+#profile img {   /* Elementos Inline não conseguimos aplicar Margin: auto;.  Teríamos que forçar ele virar Block: */
+    display: block;
+    width: 112px;
+    margin: auto;
+                /* Mas em display: Inline, ele aceita que o pai "Profile" aceite Text-align: center */
+}
+
+#profile p {
+    text-align: center;
+    font-weight: 500; /*negrito*/
+    line-height: 24px; /*altura da linha*/
+    margin-top: 8px;
+    margin-bottom: 20px;
+    
+}
+
+
+/* SWITCH */
+#switch {
+    position: relative;
+    width: 64px;
+
+    margin: 4px auto; /*4px em cima/baixo, automático dos lados*/
+}
+
+#switch button{
+width: 32px;
+height: 32px;
+background: white var(--switch-bg-url) no-repeat 
+center; /*img n se repete e fica no centro*/
+border: 0;
+border-radius: 50%; /* faz ficar redondo*/
+
+position: absolute; /*sobreposição de camada*/
+z-index: 10; /*subir o botão para fica sobre o elemento abaixo (subir de andar)*/
+/*right: 0; posição do botão: top, left, rigth, bottom*/
+top: 50%; /* alinhar o botão*/
+transform: translateY(-50%); /*movimentar o botão para cima e baixo */
+}
+
+.light #switch button {
+    right: 0;
+    left: initial;
+}
+
+#switch span { /*span não aceita largura pois é display inline */
+    display: block;
+    width: 64px;
+    height: 24px;
+    background: var(--surface-color);
+    border: 1px solid var(--stroke-color);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 9999px;
+
+
+}
+
+/* links - textos dos botões */
+ul {
+    list-style: none; /*tirar as bolinhas da lista*/
+    display: flex; /*coloca um item ao lado do outro*/
+    flex-direction: column; /*itens um abaixo do outro*/
+    gap: 16px; /*espaços entre os itens*/
+    padding: 24px 0; /* cima/baixo, lateral*/
+}
+
+/* links - botões */
+ul li a {
+/*  border: 1px solid red; /* é valido fazer uma borda para ter noção */
+    display: flex; /*fazer com que o A(link) ocupe todo o espaço da caixa*/
+/*  flex-direction: row; /* já é o padrão do box sizing: border; */ 
+    justify-content: center; /*alinhar o texto das caixas no centro*/
+/*  display: block;
+    text-align: center; /* alinhar o texto com o display block */
+/*  align-items: center; alinhar o texto no centro do lado esquerdo da caixa (precisa ter uma height para ver funcionando)
+    height: 20px;*/
+    padding: 16px 24px;
+    background: var(); /* rgba -Red,Green,Blue,Alpha/transparência */
+    border: 1px solid var(--surface-color);
+    border-radius: 8px; /*arrendondar a borda*/
+    
+    backdrop-filter: blur(4px); /*embaçar um pouco */
+    
+    text-decoration: none; /* underline - linha abaixo do dtexto */
+    font-weight: 500; /* peso da fonte | 400 é o Padrão, acima de 400 é bold/negrito */
+
+    transition: background 0.2s;
+
+}
+
+/* pseudo-selector -  quando passar o mouse encima (Os pseudosseletores são uma forma de
+selecionar elementos HTML com base em seu estado ou posição em relação a outros elementos.)*/
+ul li a:hover {
+    background: var(--surface-color-houver); /* rgba -Red,Green,Blue,Alpha/transparência */
+    border: 1.5px solid var(--text-color);
+}
+
+/* social- links */
+#social-links{
+    display: flex; /*para habilitar o gap*/ 
+    justify-content: center; /*com o display:flex, podemos dar um justify-content: center para alinhamento*/
+    /*gap: 32px; espaçamento entre os ícones*/
+    padding: 24px 0; /* cima/baixo, lateral*/
+    font-size: 24px; /*tamanho dos ícones*/
+}
+
+#social-links a{ /* os links(a) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    border-radius: 50%; /* fazer uma borda redonda */
+    transition: background 0.2s;
+}
+
+#social-links a:hover{
+    background:var(--highlight-color);
+}
+
+footer {
+    padding: 24px 0;
+    text-align: center;
+    font-size: 14px;
+}
